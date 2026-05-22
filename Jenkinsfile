@@ -61,3 +61,17 @@ stage('Deploy') {
     }
 }
 
+post {
+    success {
+        mail to: 'your-email@example.com',
+             subject: "BUILD SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+             body: "Good news! Build ${env.BUILD_URL} completed successfully."
+    }
+    failure {
+        mail to: 'your-email@example.com',
+             subject: "BUILD FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+             body: "Build ${env.BUILD_URL} has failed. Please check the logs."
+    }
+}
+
+
